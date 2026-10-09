@@ -1,0 +1,22 @@
+# Patient questions. {city} is replaced with the practice's city.
+# Keep them phrased the way real people type or speak to an AI assistant.
+Who is the best dentist in {city}?
+I need an emergency dentist in {city} today, who should I call?
+Which dentists in {city} are good with nervous or anxious patients?
+Best family dentist in {city} for kids?
+Where can I get affordable dental implants in {city}?
+Who does Invisalign in {city} and what does it cost?
+Which dentists in {city} offer sedation dentistry?
+Recommend a dentist in {city} that takes new patients and accepts insurance.
+Best cosmetic dentist in {city} for veneers?
+Which dentist in {city} has the best reviews?
+Where can I get teeth whitening in {city}?
+Is there a dentist open on Saturdays in {city}?
+Who is a good dentist for root canals in {city}?
+Which dental practices in {city} offer payment plans?
+I chipped my tooth, which dentist in {city} can see me quickly?
+Best pediatric dentist in {city}?
+Which dentist in {city} is good for seniors and dentures?
+Where should I go for a dental cleaning in {city}?
+Best rated orthodontist or dentist for braces in {city}?
+Which dentists near downtown {city} are highly recommended?

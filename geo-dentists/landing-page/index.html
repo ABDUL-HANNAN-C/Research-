@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AskedFirst | AI Visibility for Dentists</title>
+<meta name="description" content="Find out if ChatGPT, Gemini and Google AI recommend your dental practice, or your competitors. Get a clear audit and a fix list.">
+<style>
+  :root {
+    --bg: #fbfaf7; --surface: #ffffff; --text: #1b1f24; --muted: #5b6470;
+    --accent: #0f766e; --accent-ink: #ffffff; --border: #e4e2dc; --good: #15803d; --bad: #b91c1c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111416; --surface: #1a1e21; --text: #eceff1; --muted: #a3acb5;
+      --accent: #2dd4bf; --accent-ink: #062b27; --border: #2b3136; --good: #4ade80; --bad: #f87171;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111416; --surface: #1a1e21; --text: #eceff1; --muted: #a3acb5;
+    --accent: #2dd4bf; --accent-ink: #062b27; --border: #2b3136; --good: #4ade80; --bad: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-weight: 700; letter-spacing: -0.02em; }
+  .logo span { color: var(--accent); }
+  a.btn, button { display: inline-block; background: var(--accent); color: var(--accent-ink);
+    border: 0; border-radius: 10px; padding: 12px 20px; font: inherit; font-weight: 600;
+    text-decoration: none; cursor: pointer; }
+  .hero { padding: 48px 0 32px; }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.12; letter-spacing: -0.03em; margin: 0 0 16px; max-width: 18ch; }
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+  .chat { margin: 32px 0; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; max-width: 620px; }
+  .chat .q { font-weight: 600; margin-bottom: 8px; }
+  .chat .a { color: var(--muted); }
+  .chat .you { color: var(--bad); font-weight: 600; }
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.6rem; letter-spacing: -0.02em; margin: 0 0 16px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 1.1rem; }
+  .price { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+  .price small { font-size: 1rem; color: var(--muted); font-weight: 400; }
+  ul.ticks { padding-left: 1.1em; margin: 8px 0 0; }
+  ul.ticks li { margin: 4px 0; }
+  .featured { border: 2px solid var(--accent); }
+  form { display: grid; gap: 12px; max-width: 520px; }
+  label { font-weight: 600; font-size: 0.95rem; }
+  input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font: inherit; }
+  .fine { color: var(--muted); font-size: 0.9rem; }
+  details { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin: 10px 0; }
+  summary { font-weight: 600; cursor: pointer; }
+  footer { padding: 32px 0; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Asked<span>First</span></div>
+    <a class="btn" href="#check">Free check</a>
+  </header>
+
+  <div class="hero">
+    <h1>When patients ask AI for a dentist, does it name you?</h1>
+    <p class="lede">More and more patients now ask ChatGPT, Gemini and Google's AI answers to recommend a dentist. Those answers usually name only a handful of practices. We check exactly what AI tells patients in your area and give you a plain-English plan to get included.</p>
+    <div class="chat" aria-label="Example AI answer">
+      <div class="q">"Who's a good dentist for nervous patients near me?"</div>
+      <div class="a">"Here are three highly rated options: Practice A, Practice B, Practice C…"</div>
+      <div class="you" style="margin-top:10px">Your practice: not mentioned.</div>
+    </div>
+    <a class="btn" href="#check">Get your free 3-question check</a>
+  </div>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="grid">
+      <div class="card"><h3>1. We ask like a patient</h3>We put 20 real patient questions to an AI assistant with live web search: emergencies, implants, Invisalign, kids, anxiety, insurance and more, all for your city.</div>
+      <div class="card"><h3>2. We show who wins</h3>You see your visibility score, which competitors get recommended instead, and which websites the AI trusts as its sources.</div>
+      <div class="card"><h3>3. You get a fix list</h3>Specific actions such as directory profiles, missing pages and review platforms, ranked by impact. Do them yourself, or we do them for you.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pricing</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Free check</h3>
+        <div class="price">$0</div>
+        <ul class="ticks"><li>3 patient questions</li><li>Mentioned or not, plus who was named instead</li><li>Emailed within 2 business days</li></ul>
+      </div>
+      <div class="card featured">
+        <h3>Full audit</h3>
+        <div class="price">$149 <small>one-time</small></div>
+        <ul class="ticks"><li>20 patient questions</li><li>Visibility score and competitor table</li><li>The sources AI relies on</li><li>Prioritised fix list</li></ul>
+      </div>
+      <div class="card">
+        <h3>Ongoing</h3>
+        <div class="price">$299 <small>/ month</small></div>
+        <ul class="ticks"><li>Monthly re-audit and progress report</li><li>We write the FAQ and service pages you're missing</li><li>Directory profile clean-up</li><li>Cancel anytime</li></ul>
+      </div>
+    </div>
+    <p class="fine">Founding offer: the first 10 practices get the full audit at 50% off in exchange for honest feedback.</p>
+  </section>
+
+  <section id="check">
+    <h2>Get your free check</h2>
+    <!-- Replace YOUR_FORM_ID with a free Formspree (or Tally/Google Forms) endpoint before publishing. -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div><label for="practice">Practice name</label><input id="practice" name="practice" required></div>
+      <div><label for="city">City</label><input id="city" name="city" required placeholder="e.g. Austin, TX"></div>
+      <div><label for="website">Website</label><input id="website" name="website" placeholder="yourpractice.com"></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+      <button type="submit">Send me my free check</button>
+      <p class="fine">We'll only use your email to send your results and one follow-up. No spam.</p>
+    </form>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <details><summary>Can you guarantee ChatGPT will recommend us?</summary><p>No, and be wary of anyone who does. AI answers change and vary between assistants. What we do is measure where you stand, fix what's within your control, and track the trend month by month.</p></details>
+    <details><summary>Is this the same as SEO?</summary><p>It builds on SEO. AI assistants lean heavily on directories, review sites and clear, specific pages. Many practices that rank well on Google are still missing from AI answers.</p></details>
+    <details><summary>Do you need access to our website or accounts?</summary><p>Not for the audit. For the ongoing plan, we can either send you the content to publish or work with your web person.</p></details>
+    <details><summary>How is the audit done?</summary><p>We use an AI assistant with live web search to ask real patient questions, then a person reviews every report before it reaches you.</p></details>
+  </section>
+
+  <footer>© AskedFirst · Independent service, not affiliated with OpenAI, Google or Anthropic.</footer>
+</div>
+</body>
+</html>
