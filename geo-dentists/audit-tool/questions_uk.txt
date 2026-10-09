@@ -1,0 +1,21 @@
+# UK patient questions. {city} is replaced with the practice's town or city.
+Who is the best dentist in {city}?
+Are there any NHS dentists in {city} taking on new patients?
+I can't find an NHS dentist in {city}, which private dentist would you recommend?
+I need an emergency dentist in {city} today, who should I call?
+Which dentists in {city} are good with nervous patients?
+Best family dentist in {city} for children?
+Where can I get affordable dental implants in {city}?
+Who does Invisalign in {city} and how much does it cost?
+Which dentists in {city} offer sedation?
+Which dental practices in {city} offer a monthly dental plan?
+Best cosmetic dentist in {city} for veneers or composite bonding?
+Which dentist in {city} has the best reviews?
+Where can I get teeth whitening in {city}?
+Is there a dentist open on Saturdays in {city}?
+Who is a good dentist for root canal treatment in {city}?
+Which dentists in {city} offer finance or payment plans?
+I've chipped my tooth, which dentist in {city} can see me quickly?
+Best dentist for dentures in {city}?
+Where should I go for a hygienist appointment in {city}?
+Which dentists in {city} are highly recommended?

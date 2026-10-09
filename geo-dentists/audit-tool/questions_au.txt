@@ -1,0 +1,21 @@
+# Australia patient questions. {city} is replaced with the practice's suburb or city.
+Who is the best dentist in {city}?
+Which dentists in {city} bulk bill under the Child Dental Benefits Schedule?
+Which dentists in {city} offer no-gap check-ups with my health fund?
+I need an emergency dentist in {city} today, who should I call?
+Which dentists in {city} are good with nervous patients?
+Best family dentist in {city} for kids?
+Where can I get affordable dental implants in {city}?
+Who does Invisalign in {city} and how much does it cost?
+Which dentists in {city} offer sleep dentistry or sedation?
+Best cosmetic dentist in {city} for veneers?
+Which dentist in {city} has the best reviews?
+Where can I get teeth whitening in {city}?
+Is there a dentist open on Saturdays in {city}?
+Who is a good dentist for root canal treatment in {city}?
+Which dental clinics in {city} offer payment plans like Afterpay?
+I chipped my tooth, which dentist in {city} can see me quickly?
+Best dentist for dentures in {city}?
+Where should I go for a scale and clean in {city}?
+Which dentists in {city} are accepting new patients?
+Which dental clinics in {city} are highly recommended?

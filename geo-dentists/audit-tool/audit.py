@@ -6,7 +6,7 @@ Writes a Markdown report you can review and send to the client.
 
 Usage:
     python audit.py --practice "Smile Dental Studio" --domain smiledentalstudio.com \
-        --city "Austin, TX" [--questions questions.txt] [--limit 5]
+        --city "Austin, TX" [--country us|uk|ca|au] [--limit 5]
 """
 
 import argparse
@@ -29,14 +29,21 @@ SYSTEM = (
 )
 
 
-def ask(client: anthropic.Anthropic, question: str, city: str) -> tuple[str, list[str]]:
+COUNTRY_CODES = {"us": "US", "uk": "GB", "ca": "CA", "au": "AU"}
+
+
+def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> tuple[str, list[str]]:
     """Return (answer_text, cited_urls) for one patient question."""
     messages = [{"role": "user", "content": question}]
     tools = [{
         "type": "web_search_20260209",
         "name": "web_search",
         "max_uses": 5,
-        "user_location": {"type": "approximate", "city": city.split(",")[0].strip()},
+        "user_location": {
+            "type": "approximate",
+            "city": city.split(",")[0].strip(),
+            "country": COUNTRY_CODES[country],
+        },
     }]
 
     for _ in range(MAX_CONTINUATIONS):
@@ -90,13 +97,15 @@ def main() -> None:
     parser.add_argument("--practice", required=True, help="Practice name as patients know it")
     parser.add_argument("--domain", default="", help="Practice website domain")
     parser.add_argument("--city", required=True, help='e.g. "Austin, TX"')
-    parser.add_argument("--questions", default=str(Path(__file__).with_name("questions.txt")))
+    parser.add_argument("--country", choices=sorted(COUNTRY_CODES), default="us")
+    parser.add_argument("--questions", default="", help="Question file (default: questions_<country>.txt)")
     parser.add_argument("--limit", type=int, default=0, help="Only ask the first N questions")
     parser.add_argument("--out", default="", help="Report path (default: reports/<practice>.md)")
     args = parser.parse_args()
 
+    questions_path = Path(args.questions) if args.questions else Path(__file__).with_name(f"questions_{args.country}.txt")
     templates = [
-        line.strip() for line in Path(args.questions).read_text().splitlines()
+        line.strip() for line in questions_path.read_text().splitlines()
         if line.strip() and not line.startswith("#")
     ]
     if args.limit:
@@ -109,7 +118,7 @@ def main() -> None:
 
     for i, question in enumerate(questions, 1):
         print(f"[{i}/{len(questions)}] {question}")
-        answer, urls = ask(client, question, args.city)
+        answer, urls = ask(client, question, args.city, args.country)
         recommended = parse_recommended(answer)
         mentioned = is_mentioned(args.practice, args.domain, answer, urls)
         for name in recommended:

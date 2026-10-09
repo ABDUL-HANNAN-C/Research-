@@ -1,0 +1,21 @@
+# Canada patient questions. {city} is replaced with the practice's city.
+Who is the best dentist in {city}?
+Which dentists in {city} accept the Canadian Dental Care Plan (CDCP)?
+I need an emergency dentist in {city} today, who should I call?
+Which dentists in {city} are good with anxious patients?
+Best family dentist in {city} for kids?
+Which dentists in {city} are accepting new patients?
+Where can I get affordable dental implants in {city}?
+Who does Invisalign in {city} and what does it cost?
+Which dentists in {city} offer sedation dentistry?
+Which dentists in {city} bill my insurance directly?
+Best cosmetic dentist in {city} for veneers?
+Which dentist in {city} has the best reviews?
+Where can I get teeth whitening in {city}?
+Is there a dentist open on weekends in {city}?
+Who is a good dentist for root canals in {city}?
+Which dental clinics in {city} offer payment plans?
+I chipped my tooth, which dentist in {city} can see me quickly?
+Best dentist for seniors and dentures in {city}?
+Where should I go for a dental cleaning in {city}?
+Which dental clinics in {city} are highly recommended?
