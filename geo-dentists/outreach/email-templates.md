@@ -29,7 +29,7 @@ I run free 3-question checks for Charlotte practices. They show where you appear
 Best,
 {Your name}
 AskedFirst | AI visibility for dental practices
-{Website} · {Phone}
+askedfirst.audits@gmail.com · {Website}
 
 {Physical mailing address}
 *Not interested? Reply "no thanks" and I won't email again.*
