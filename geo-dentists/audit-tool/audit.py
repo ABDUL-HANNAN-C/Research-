@@ -27,7 +27,10 @@ SYSTEM = (
     "specific practice names. Do not favour any practice. At the very end of your "
     "answer add one line in exactly this format:\n"
     "RECOMMENDED: <practice name 1>; <practice name 2>; ...\n"
-    "listing every dental practice you named, in the order you named them."
+    "listing every dental practice you named, in the order you named them. "
+    "Then add one final line in exactly this format:\n"
+    "SOURCES: <url 1>; <url 2>; ...\n"
+    "listing the full URLs of the web pages your answer relied on."
 )
 
 
@@ -48,6 +51,7 @@ def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> 
         },
     }]
 
+    blocks = []
     for _ in range(MAX_CONTINUATIONS):
         response = client.beta.messages.create(
             model=MODEL,
@@ -59,6 +63,7 @@ def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> 
             betas=["server-side-fallback-2026-07-01"],
             fallbacks="default",
         )
+        blocks += response.content
         if response.stop_reason == "pause_turn":
             # Server-side search loop paused; resend so it resumes where it left off.
             messages.append({"role": "assistant", "content": response.content})
@@ -69,14 +74,21 @@ def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> 
         return "(model declined to answer)", []
 
     text_parts, urls = [], []
-    for block in response.content:
+    for block in blocks:
         if block.type == "text":
             text_parts.append(block.text)
             for citation in getattr(block, "citations", None) or []:
                 url = getattr(citation, "url", None)
                 if url and url not in urls:
                     urls.append(url)
-    return "".join(text_parts).strip(), urls
+    text = "".join(text_parts).strip()
+    # Web search filters results through code execution, so text often has no citations.
+    match = re.search(r"SOURCES:\s*(.+)", text)
+    if match:
+        for url in re.findall(r"https?://[^\s;,)]+", match.group(1)):
+            if url not in urls:
+                urls.append(url)
+    return text, urls
 
 
 def parse_recommended(answer: str) -> list[str]:
