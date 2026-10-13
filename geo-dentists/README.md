@@ -15,7 +15,7 @@ A ready-to-launch kit for Pick 1 from `../2027-opportunities-research.md`.
 ```bash
 cd audit-tool
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=sk-ant-...        # from console.anthropic.com
+export AUDIT_ANTHROPIC_KEY=sk-ant-...      # from console.anthropic.com
 python audit.py --practice "Smile Dental Studio" --domain smiledentalstudio.com \
     --city "Austin, TX" --limit 3          # free check: 3 questions
 python audit.py --practice "Smile Dental Studio" --domain smiledentalstudio.com \

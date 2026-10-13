@@ -11,7 +11,9 @@ Usage:
 
 import argparse
 import datetime
+import os
 import re
+import sys
 from pathlib import Path
 
 import anthropic
@@ -112,7 +114,12 @@ def main() -> None:
         templates = templates[: args.limit]
     questions = [t.replace("{city}", args.city) for t in templates]
 
-    client = anthropic.Anthropic()
+    # Use a dedicated variable so the key is never confused with the session's own credentials,
+    # and always talk to the public API directly.
+    api_key = os.environ.get("AUDIT_ANTHROPIC_KEY") or os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        sys.exit("Set AUDIT_ANTHROPIC_KEY (or ANTHROPIC_API_KEY) to your Anthropic API key.")
+    client = anthropic.Anthropic(api_key=api_key, base_url="https://api.anthropic.com")
     results = []
     competitor_counts: dict[str, int] = {}
 
