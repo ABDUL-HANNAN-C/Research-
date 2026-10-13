@@ -34,13 +34,22 @@ SYSTEM = (
 COUNTRY_CODES = {"us": "US", "uk": "GB", "ca": "CA", "au": "AU"}
 
 
-def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> tuple[str, list[str]]:
-    """Return (answer_text, cited_urls) for one patient question."""
+# Approximate list prices, used only to print a running cost estimate.
+PRICE_IN, PRICE_OUT, PRICE_SEARCH = 4 / 1e6, 20 / 1e6, 10 / 1000
+
+
+def estimate_cost(usage: dict) -> float:
+    return usage["in"] * PRICE_IN + usage["out"] * PRICE_OUT + usage["searches"] * PRICE_SEARCH
+
+
+def ask(client: anthropic.Anthropic, question: str, city: str, country: str,
+        usage: dict | None = None, max_searches: int = 3) -> tuple[str, list[str]]:
+    """Return (answer_text, cited_urls) for one patient question. Adds token use to `usage`."""
     messages = [{"role": "user", "content": question}]
     tools = [{
         "type": "web_search_20260209",
         "name": "web_search",
-        "max_uses": 5,
+        "max_uses": max_searches,
         "user_location": {
             "type": "approximate",
             "city": city.split(",")[0].strip(),
@@ -55,10 +64,17 @@ def ask(client: anthropic.Anthropic, question: str, city: str, country: str) -> 
             system=SYSTEM,
             tools=tools,
             messages=messages,
-            output_config={"effort": "medium"},
+            output_config={"effort": "low"},
             betas=["server-side-fallback-2026-07-01"],
             fallbacks="default",
         )
+        if usage is not None:
+            u = response.usage
+            usage["in"] += (u.input_tokens or 0) + (getattr(u, "cache_read_input_tokens", 0) or 0) \
+                + (getattr(u, "cache_creation_input_tokens", 0) or 0)
+            usage["out"] += u.output_tokens or 0
+            stu = getattr(u, "server_tool_use", None)
+            usage["searches"] += (getattr(stu, "web_search_requests", 0) or 0) if stu else 0
         if response.stop_reason == "pause_turn":
             # Server-side search loop paused; resend so it resumes where it left off.
             messages.append({"role": "assistant", "content": response.content})
@@ -88,7 +104,8 @@ def parse_recommended(answer: str) -> list[str]:
 
 def is_mentioned(practice: str, domain: str, answer: str, urls: list[str]) -> bool:
     haystack = answer.lower()
-    if practice.lower() in haystack:
+    names = [n.strip().lower() for n in practice.split("|") if n.strip()]  # "Name|Alias" supported
+    if any(n in haystack for n in names):
         return True
     domain = domain.lower().removeprefix("www.")
     return bool(domain) and (domain in haystack or any(domain in u.lower() for u in urls))
@@ -120,12 +137,13 @@ def main() -> None:
     if not api_key:
         sys.exit("Set AUDIT_ANTHROPIC_KEY (or ANTHROPIC_API_KEY) to your Anthropic API key.")
     client = anthropic.Anthropic(api_key=api_key, base_url="https://api.anthropic.com")
+    usage = {"in": 0, "out": 0, "searches": 0}
     results = []
     competitor_counts: dict[str, int] = {}
 
     for i, question in enumerate(questions, 1):
         print(f"[{i}/{len(questions)}] {question}")
-        answer, urls = ask(client, question, args.city, args.country)
+        answer, urls = ask(client, question, args.city, args.country, usage)
         recommended = parse_recommended(answer)
         mentioned = is_mentioned(args.practice, args.domain, answer, urls)
         for name in recommended:
@@ -203,6 +221,8 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines) + "\n")
     print(f"\nScore {score}% - report written to {out}")
+    print(f"Estimated API cost: ${estimate_cost(usage):.2f} "
+          f"({usage['in']} input tokens, {usage['out']} output tokens, {usage['searches']} searches)")
 
 
 if __name__ == "__main__":
